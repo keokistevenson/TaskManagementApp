@@ -1,4 +1,9 @@
-
+// Retrieve DOM Element References
+const txtTaskName = document.getElementById("txtTaskName"),
+    ddlCategory = document.getElementById("ddlCategory"),
+    ddlStatus = document.getElementById("ddlStatus"),
+    calDeadline = document.getElementById("calDeadline"),
+    btnAddTask = document.getElementById("btnAddTask");
 class Task {
     constructor(name, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
         let date;
@@ -37,4 +42,10 @@ const taskStatus = {
 const taskCategories = ["Work", "Personal", "Health", "Education", "Shopping"];
 
 // Holds all the tasks
-const taskList = []
+const taskList = [];
+
+
+
+
+
+
