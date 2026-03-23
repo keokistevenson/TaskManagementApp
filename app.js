@@ -23,7 +23,7 @@ class Task {
 
         if (deadline === null || deadline === "") {
             date = new Date();
-            date.setDate(date.getDate()); 
+            date.setDate(date.getDate());
         } else {
             date = parseDateInput(deadline);  // I will not address time. Fixes bug.
 
@@ -50,15 +50,10 @@ class Task {
     }
 
     isOverdue() {
-        let overdue = false;
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        if (today > this.deadline) {
-            this.status = taskStatus.Overdue;  // This is biting me because I avoided addressing this. Now its a bug.
-            overdue = true;
-        }
-        return overdue;
+        return today > this.deadline;
     }
 
     isDueToday() {
@@ -184,6 +179,14 @@ function displayTasks() {
             }
 
             ddlChangeStatus.appendChild(option);
+        }
+
+        if (task.isOverdue()) {
+            const overdueLabel = document.createElement("span");
+            overdueLabel.className = "overdue";
+            overdueLabel.textContent = " Overdue";
+
+            p.appendChild(overdueLabel);
         }
 
         // Create a ddlChangeStatus event for each task

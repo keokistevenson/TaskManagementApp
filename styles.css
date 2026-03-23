@@ -83,3 +83,7 @@ body {
 .btnDelete:hover {
   background: #c9302c;
 }
+
+.overdue {
+  color: #e74c3c;
+}
