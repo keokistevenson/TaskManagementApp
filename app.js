@@ -1,7 +1,6 @@
 // Retrieve DOM Element References
 const txtTaskName = document.getElementById("txtTaskName"),
     ddlCategory = document.getElementById("ddlCategory"),
-    ddlStatus = document.getElementById("ddlStatus"),
     calDeadline = document.getElementById("calDeadline"),
     btnAddTask = document.getElementById("btnAddTask");
 
@@ -72,21 +71,6 @@ class Task {
 
 
 // Functions
-function loadStatusDropdown() {
-    const ddlStatus = document.getElementById("ddlStatus"); // Best Practice: Could be null even with defer.
-
-    if (!ddlStatus) {
-        console.error("Dropdown for Status is not found!");
-        return;
-    }
-
-    for (const status of Object.values(taskStatus)) {
-        const option = document.createElement("option");
-        option.value = option.textContent = status;
-        ddlStatus.appendChild(option);
-    }
-}
-
 function loadCategoryDropdown() {
     const ddlCategory = document.getElementById("ddlCategory"); // Best Practice: Could be null even with defer.
 
@@ -237,7 +221,6 @@ function addTask(taskName, category, deadline) {
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
-    loadStatusDropdown();
     loadCategoryDropdown();
     displayTasks();
 });
