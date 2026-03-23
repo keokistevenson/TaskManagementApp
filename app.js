@@ -21,9 +21,9 @@ class Task {
     constructor(name, category, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
         let date;
 
-        if (deadline === null) {
+        if (deadline === null || deadline === "") {
             date = new Date();
-            date.setDate(date.getDate() + 1); // default = tomorrow
+            date.setDate(date.getDate()); 
         } else {
             date = new Date(deadline);  // I will not address time.
 
@@ -55,7 +55,7 @@ class Task {
         today.setHours(0, 0, 0, 0);
 
         if (today > this.deadline) {
-            this.status = taskStatus.Overdue;
+            this.status = taskStatus.Overdue;  // This is biting me because I avoided addressing this. Now its a bug.
             overdue = true;
         }
         return overdue;
@@ -78,6 +78,15 @@ function loadCategoryDropdown() {
         console.error("Dropdown for Category is not found!");
         return;
     }
+
+    ddlCategory.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Select Category";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    ddlCategory.appendChild(defaultOption);
 
     for (const category of Object.values(taskCategories)) {
         const option = document.createElement("option");
@@ -218,6 +227,12 @@ function addTask(taskName, category, deadline) {
     displayTasks();
 }
 
+function resetForm() {
+    txtTaskName.value = "";
+    ddlCategory.selectedIndex = 0;
+    calDeadline.value = "";
+}
+
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
@@ -227,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 btnAddTask.addEventListener("click", function () {
     addTask(txtTaskName.value, ddlCategory.value, calDeadline.value);
-    txtTaskName.value = "";  // Prepare for next task. Clear input for next task.
+    resetForm();
 });
 
 
