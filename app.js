@@ -19,7 +19,7 @@ const taskCategories = ["Work", "Personal", "Health", "Education", "Finance"];
 const taskList = [];
 
 class Task {
-    constructor(name, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
+    constructor(name, category, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
         let date;
 
         if (deadline === null) {
@@ -37,6 +37,7 @@ class Task {
 
         this.name = name;
         this.creationDate = new Date();
+        this.category = category;
         this.deadline = date;
         this.status = taskStatus.In_Progress;
     }
@@ -97,6 +98,23 @@ function loadCategoryDropdown() {
     }
 }
 
+function displayTasks() {
+
+    
+}
+
+function addTask(taskName, category, deadline) {
+
+    // Create task
+    const task = new Task(taskName, category, deadline);
+
+    // Add task to task list
+    taskList.push(task);
+
+    // Display task
+    displayTasks();
+}
+
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
@@ -104,8 +122,17 @@ document.addEventListener("DOMContentLoaded", () => {
     loadCategoryDropdown();
 });
 
+btnAddTask.addEventListener("click", function () {
+    addTask(txtTaskName.value, ddlCategory.value, calDeadline.value);
+    txtTaskName.value = "";  // Prepare for next task. Clear input for next task.
+});
 
 
+txtTaskName = document.getElementById("txtTaskName"),
+    ddlCategory = document.getElementById("ddlCategory"),
+    ddlStatus = document.getElementById("ddlStatus"),
+    calDeadline = document.getElementById("calDeadline"),
+    btnAddTask = document.getElementById("btnAddTask");
 
 
 
