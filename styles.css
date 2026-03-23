@@ -1,0 +1,53 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+}
+
+.card h3 {
+  margin: 0 0 6px 0;
+  font-size: 16px;
+}
+
+
+/* Affects category and due date */
+.card p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* category dropdown (looks like text) */
+.ddlChangeCategory {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.ddlChangeCategory:hover {
+  border-bottom: 2px dashed  #666;  /* Make consistent with calChangedDeadline:hover */
+}
+
+/* calendar control (looks like text) */
+.calChangeDeadline {
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.calChangeDeadline:hover {
+    border-bottom: 2px dashed  #666;  /* Alternative to text-decoration: underline; DID NOT SEEM TO WORK!!! */
+}
