@@ -19,6 +19,10 @@ const taskList = [];
 
 class Task {
     constructor(name, category, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
+        if (!name || name.trim() === "") {
+            throw new Error("Task name is required.");
+        }
+        
         let date;
 
         if (deadline === null || deadline === "") {
@@ -250,6 +254,14 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 btnAddTask.addEventListener("click", function () {
+    const taskName = txtTaskName.value.trim();
+
+    if (taskName === "") {
+        alert("Please enter a task name.");
+        txtTaskName.focus();
+        return;
+    }
+
     addTask(txtTaskName.value, ddlCategory.value, calDeadline.value);
     resetForm();
 });
