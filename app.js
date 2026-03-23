@@ -25,7 +25,7 @@ class Task {
             date = new Date();
             date.setDate(date.getDate()); 
         } else {
-            date = new Date(deadline);  // I will not address time.
+            date = parseDateInput(deadline);  // I will not address time. Fixes bug.
 
             if (isNaN(date.getTime())) {
                 throw new Error("Invalid deadline");
@@ -157,7 +157,7 @@ function displayTasks() {
         calChangeDeadline.value = formatDateForInput(task.deadline);
 
         calChangeDeadline.addEventListener("change", (e) => {
-            const newDate = new Date(e.target.value);
+            const newDate = parseDateInput(e.target.value);
 
             if (!isNaN(newDate.getTime())) {
                 newDate.setHours(0, 0, 0, 0);
@@ -233,6 +233,12 @@ function resetForm() {
     calDeadline.value = "";
 }
 
+// I don't understand this. I haven't  had time to study what is going on. Fixes bug.
+function parseDateInput(value) {
+    const [year, month, day] = value.split("-").map(Number);
+    return new Date(year, month - 1, day);
+}
+
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
@@ -244,9 +250,3 @@ btnAddTask.addEventListener("click", function () {
     addTask(txtTaskName.value, ddlCategory.value, calDeadline.value);
     resetForm();
 });
-
-
-
-
-
-
