@@ -51,3 +51,29 @@ body {
 .calChangeDeadline:hover {
     border-bottom: 2px dashed  #666;  /* Alternative to text-decoration: underline; DID NOT SEEM TO WORK!!! */
 }
+
+
+.card footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.ddlChangeStatus {
+  padding: 4px;
+  font-size: 14px;
+}
+
+.btnDelete {
+  background:#666;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btnDelete:hover {
+  background: #c9302c;
+}
