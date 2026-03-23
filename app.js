@@ -11,6 +11,13 @@ const taskStatus = {
     Completed: "Completed",  // I think we are mixing terms. A task can be overdue and completed, or it can be in progres and overdue.
     Overdue: "Overdue"
 };
+
+// Preliminary list of tasks
+const taskCategories = ["Work", "Personal", "Health", "Education", "Finance"];
+
+// Holds all the tasks
+const taskList = [];
+
 class Task {
     constructor(name, deadline = null) {  // I hope I don't regret trying to use object oriented concepts. 
         let date;
@@ -58,12 +65,6 @@ class Task {
     }
 }
 
-// Preliminary list of tasks
-const taskCategories = ["Work", "Personal", "Health", "Education", "Finance"];
-
-// Holds all the tasks
-const taskList = [];
-
 
 // Functions
 function loadStatusDropdown() {
@@ -77,22 +78,22 @@ function loadStatusDropdown() {
     for (const status of Object.values(taskStatus)) {
         const option = document.createElement("option");
         option.value = option.textContent = status;
-        dropdown.appendChild(option);
+        ddlStatus.appendChild(option);
     }
 }
 
 function loadCategoryDropdown() {
-    const dropdown = document.getElementById("ddlCategory"); // Best Practice: Could be null even with defer.
+    const ddlCategory = document.getElementById("ddlCategory"); // Best Practice: Could be null even with defer.
 
     if (!ddlCategory) {
         console.error("Dropdown for Category is not found!");
         return;
     }
 
-    for (const category in Object.values(taskCategories)) {
+    for (const category of Object.values(taskCategories)) {
         const option = document.createElement("option");
         option.value = option.textContent = category;
-        dropdown.appendChild(option);
+        ddlCategory.appendChild(option);
     }
 }
 
