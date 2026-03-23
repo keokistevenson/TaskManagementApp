@@ -99,8 +99,36 @@ function loadCategoryDropdown() {
 }
 
 function displayTasks() {
+    const lstTaskList = document.getElementById("lstTaskList");
+    lstTaskList.innerHTML = ""; // refresh list
 
-    
+    // Prepare to create list items.
+    const li = document.createElement("li");
+
+    // Check if any tasks exist
+    if (taskList.length === 0) {
+        const li = document.createElement("li");
+        li.textContent = "No tasks yet";
+        lstTaskList.appendChild(li);
+        return;
+    }
+
+    // If task exist, display tasks in lstTaskList
+    for (const task of taskList) {
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <div class="taskCard">
+                <h3>${task.name}</h3>
+                <p>Status: ${task.status}</p>
+                <p>Category: ${task.category}</p>
+                <footer>Due: ${task.deadline}</footer>
+            </div>`;
+
+        lstTaskList.appendChild(li);
+    }
+
+
 }
 
 function addTask(taskName, category, deadline) {
@@ -128,11 +156,7 @@ btnAddTask.addEventListener("click", function () {
 });
 
 
-txtTaskName = document.getElementById("txtTaskName"),
-    ddlCategory = document.getElementById("ddlCategory"),
-    ddlStatus = document.getElementById("ddlStatus"),
-    calDeadline = document.getElementById("calDeadline"),
-    btnAddTask = document.getElementById("btnAddTask");
+
 
 
 
