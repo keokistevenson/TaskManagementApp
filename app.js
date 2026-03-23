@@ -29,6 +29,7 @@ class Task {
         date.setHours(0, 0, 0, 0);  // Ignores time for now. Considers date only.
 
         this.name = name;
+        this.creationDate = new Date();
         this.deadline = date;
         this.status = taskStatus.In_Progress;
     }
@@ -57,13 +58,50 @@ class Task {
     }
 }
 
-
-
 // Preliminary list of tasks
-const taskCategories = ["Work", "Personal", "Health", "Education", "Shopping"];
+const taskCategories = ["Work", "Personal", "Health", "Education", "Finance"];
 
 // Holds all the tasks
 const taskList = [];
+
+
+// Functions
+function loadStatusDropdown() {
+    const ddlStatus = document.getElementById("ddlStatus"); // Best Practice: Could be null even with defer.
+
+    if (!ddlStatus) {
+        console.error("Dropdown for Status is not found!");
+        return;
+    }
+
+    for (const status of Object.values(taskStatus)) {
+        const option = document.createElement("option");
+        option.value = option.textContent = status;
+        dropdown.appendChild(option);
+    }
+}
+
+function loadCategoryDropdown() {
+    const dropdown = document.getElementById("ddlCategory"); // Best Practice: Could be null even with defer.
+
+    if (!ddlCategory) {
+        console.error("Dropdown for Category is not found!");
+        return;
+    }
+
+    for (const category in Object.values(taskCategories)) {
+        const option = document.createElement("option");
+        option.value = option.textContent = category;
+        dropdown.appendChild(option);
+    }
+}
+
+
+// Events
+document.addEventListener("DOMContentLoaded", () => {
+    loadStatusDropdown();
+    loadCategoryDropdown();
+});
 
 
 
