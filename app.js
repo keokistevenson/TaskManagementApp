@@ -1,9 +1,11 @@
 // Retrieve DOM Element References
 const txtTaskName = document.getElementById("txtTaskName"),
     ddlCategory = document.getElementById("ddlCategory"),
-    ddlStatus = document.getElementById("ddlStatus"),
     calDeadline = document.getElementById("calDeadline"),
     btnAddTask = document.getElementById("btnAddTask");
+
+const ddlFilterCategory = document.getElementById("ddlFilterCategory"),
+    ddlFilterStatus = document.getElementById("ddlFilterStatus");
 
 // I need to revisit this later. I'm already complicating things.
 const taskStatus = {
@@ -71,18 +73,27 @@ class Task {
 
 
 // Functions
-function loadStatusDropdown() {
-    const ddlStatus = document.getElementById("ddlStatus"); // Best Practice: Could be null even with defer.
+function loadFilterStatusDropdown() {
+    const ddlFilterStatus = document.getElementById("ddlFilterStatus"); // Best Practice: Could be null even with defer.
 
-    if (!ddlStatus) {
+    if (!ddlFilterStatus) {
         console.error("Dropdown for Status is not found!");
         return;
     }
 
+    ddlFilterStatus.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Filter Status";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    ddlFilterStatus.appendChild(defaultOption);
+
     for (const status of Object.values(taskStatus)) {
         const option = document.createElement("option");
         option.value = option.textContent = status;
-        ddlStatus.appendChild(option);
+        ddlFilterStatus.appendChild(option);
     }
 }
 
@@ -107,6 +118,31 @@ function loadCategoryDropdown() {
         const option = document.createElement("option");
         option.value = option.textContent = category;
         ddlCategory.appendChild(option);
+    }
+}
+
+
+function loadFilterCategoryDropdown() {
+    const ddlFilterCategory = document.getElementById("ddlFilterCategory"); // Best Practice: Could be null even with defer.
+
+    if (!ddlFilterCategory) {
+        console.error("Dropdown for Category is not found!");
+        return;
+    }
+
+    ddlFilterCategory.innerHTML = "";
+
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "Filter Category";
+    defaultOption.disabled = true;
+    defaultOption.selected = true;
+    ddlFilterCategory.appendChild(defaultOption);
+
+    for (const category of Object.values(taskCategories)) {
+        const option = document.createElement("option");
+        option.value = option.textContent = category;
+        ddlFilterCategory.appendChild(option);
     }
 }
 
@@ -265,8 +301,11 @@ function parseDateInput(value) {
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
-    loadStatusDropdown();
     loadCategoryDropdown();
+
+    loadFilterStatusDropdown();
+    loadFilterCategoryDropdown();
+
     displayTasks();
 });
 

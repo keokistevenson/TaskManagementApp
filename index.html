@@ -13,19 +13,26 @@
 
 <body>
     <h1>Task Manager</h1>
-    <label for="txtTaskName">Task Name:</label>
-    <input id="txtTaskName" type="text">
+    <div id="createTaskWapper">
+        <label for="txtTaskName">Task Name:</label>
+        <input id="txtTaskName" type="text" placeholder="Enter a task.">
 
-    <label for="ddlCategory">Category:</label>
-    <select id="ddlCategory" type="text">Select Category</select>
+        <label for="ddlCategory">Category:</label>
+        <select id="ddlCategory" type="text"></select>
 
-    <label for="ddlStatus">Status:</label>
-    <select id="ddlStatus" type="text"></select>
+        <label for="calDeadline">Deadline:</label>
+        <input id="calDeadline" type="date">
 
-    <label for="calDeadline">Deadline:</label>
-    <input id="calDeadline" type="date">
+        <button id="btnAddTask">Add Task</button>
+    </div>
 
-    <button id="btnAddTask">Add Task</button>
+    <div id="filterTaskWapper">
+        <label for="ddlFilterStatus">Filter Status:</label>
+        <select id="ddlFilterStatus" type="text"></select>
+
+         <label for="ddlFilterCategory">Filter Category:</label>
+        <select id="ddlFilterCategory" type="text"></select>
+    </div>
 
     <ul id="lstTaskList"></ul>
 
