@@ -1,6 +1,7 @@
 // Retrieve DOM Element References
 const txtTaskName = document.getElementById("txtTaskName"),
     ddlCategory = document.getElementById("ddlCategory"),
+    ddlStatus = document.getElementById("ddlStatus"),
     calDeadline = document.getElementById("calDeadline"),
     btnAddTask = document.getElementById("btnAddTask");
 
@@ -22,7 +23,7 @@ class Task {
         if (!name || name.trim() === "") {
             throw new Error("Task name is required.");
         }
-        
+
         let date;
 
         if (deadline === null || deadline === "") {
@@ -70,6 +71,21 @@ class Task {
 
 
 // Functions
+function loadStatusDropdown() {
+    const ddlStatus = document.getElementById("ddlStatus"); // Best Practice: Could be null even with defer.
+
+    if (!ddlStatus) {
+        console.error("Dropdown for Status is not found!");
+        return;
+    }
+
+    for (const status of Object.values(taskStatus)) {
+        const option = document.createElement("option");
+        option.value = option.textContent = status;
+        ddlStatus.appendChild(option);
+    }
+}
+
 function loadCategoryDropdown() {
     const ddlCategory = document.getElementById("ddlCategory"); // Best Practice: Could be null even with defer.
 
@@ -249,6 +265,7 @@ function parseDateInput(value) {
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
+    loadStatusDropdown();
     loadCategoryDropdown();
     displayTasks();
 });
