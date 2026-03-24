@@ -150,12 +150,12 @@ function formatDateForInput(date) {
     return date.toISOString().split("T")[0];
 }
 
-function displayTasks() {
+function displayTasks(tasksToDisplay = taskList) {
     const lstTaskList = document.getElementById("lstTaskList");
     lstTaskList.innerHTML = ""; // refresh list
 
     // Check if any tasks exist
-    if (taskList.length === 0) {
+    if (tasksToDisplay.length === 0) {
         const li = document.createElement("li");
         li.textContent = "No tasks yet";
         lstTaskList.appendChild(li);
@@ -163,7 +163,7 @@ function displayTasks() {
     }
 
     // If task exist, display tasks in lstTaskList
-    for (const task of taskList) {
+    for (const task of tasksToDisplay) {
         const li = document.createElement("li");  // Creates new list item each time.
 
         // Create Card
@@ -257,8 +257,8 @@ function displayTasks() {
 
         // Create a btnDelete event for each task
         btnDelete.addEventListener("click", () => {
-            const index = taskList.indexOf(task);
-            taskList.splice(index, 1);
+            const index = tasksToDisplay.indexOf(task);
+            tasksToDisplay.splice(index, 1);
             displayTasks();
         });
 
