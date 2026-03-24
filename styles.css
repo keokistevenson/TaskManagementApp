@@ -87,3 +87,11 @@ body {
 .overdue {
   color: #e74c3c;
 }
+
+#createTaskWapper {
+  margin-bottom: 25px;
+}
+
+#filterTaskWapper {
+  margin-bottom: 25px;
+}
