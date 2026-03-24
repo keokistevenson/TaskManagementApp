@@ -85,8 +85,8 @@ function loadFilterStatusDropdown() {
 
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = "Filter Status";
-    defaultOption.disabled = true;
+    defaultOption.textContent = "All";
+    // defaultOption.disabled = true;  // Allows default to be selected. 
     defaultOption.selected = true;
     ddlFilterStatus.appendChild(defaultOption);
 
@@ -134,8 +134,8 @@ function loadFilterCategoryDropdown() {
 
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = "Filter Category";
-    defaultOption.disabled = true;
+    defaultOption.textContent = "All";
+    // defaultOption.disabled = true;  // Allows default to be selected.
     defaultOption.selected = true;
     ddlFilterCategory.appendChild(defaultOption);
 
@@ -298,6 +298,53 @@ function parseDateInput(value) {
     return new Date(year, month - 1, day);
 }
 
+// I forgot how to use filter method. :D
+function filterList(selectedStatus, selectedCategory) {
+
+    let filteredList = [];
+
+    // Filter Status
+    const filterStatusList = [];
+    if (selectedStatus !== "") {
+        for (const task of taskList) {
+
+            let statusMatch = false;
+
+            // Whether it is overdue or selectedStatus add task if either is true.
+            if (selectedStatus === taskStatus.Overdue) {
+                statusMatch = task.isOverdue();
+            } else {
+                statusMatch = task.getStatus() === selectedStatus;
+            }
+
+            if (statusMatch) {
+                filterStatusList.push(task);
+            }
+        }
+
+        // Results of selectedStatus search
+        filteredList = filterStatusList;
+    } else {
+        filteredList = taskList;  // If not, keep unfiltered taskList.
+    }
+
+    // Filter Categories
+    const filterCategoryList = [];
+    if (selectedCategory !== "") {
+        for (const task of filteredList) {
+            if (task.category === selectedCategory) {
+                filterCategoryList.push(task);
+            }
+        }
+
+        // Results of selectedCategory search
+        filteredList = filterCategoryList;
+    }
+
+    // Return a filteredList
+    return filteredList;
+}
+
 // Events
 document.addEventListener("DOMContentLoaded", () => {
     loadCategoryDropdown();
@@ -319,4 +366,14 @@ btnAddTask.addEventListener("click", function () {
 
     addTask(txtTaskName.value, ddlCategory.value, calDeadline.value);
     resetForm();
+});
+
+ddlFilterCategory.addEventListener("change", (e) => {
+    displayTasks(filterList(ddlFilterStatus.value, e.target.value)); // Remember e.target is the control.
+    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too.
+});
+
+ddlFilterStatus.addEventListener("change", (e) => {
+    displayTasks(filterList(e.target.value, ddlFilterCategory.value)); // Remember e.target is the control.
+    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too.
 });
