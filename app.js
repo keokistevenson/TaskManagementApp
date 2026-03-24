@@ -370,10 +370,10 @@ btnAddTask.addEventListener("click", function () {
 
 ddlFilterCategory.addEventListener("change", (e) => {
     displayTasks(filterList(ddlFilterStatus.value, e.target.value)); // Remember e.target is the control.
-    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too.
+    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too. Get rid of e
 });
 
 ddlFilterStatus.addEventListener("change", (e) => {
     displayTasks(filterList(e.target.value, ddlFilterCategory.value)); // Remember e.target is the control.
-    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too.
+    //  displayTasks(filterList(ddlFilterStatus.value, ddlFilterCategory.value));  // This works too. Get rid of e
 });
