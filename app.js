@@ -196,7 +196,7 @@ function displayTasks(tasksToDisplay = taskList) {
         // Create a ddlChangeCategory event for each task
         ddlChangeCategory.addEventListener("change", (e) => {
             task.category = e.target.value;
-            displayTasks();
+            displayTasks(tasksToDisplay);
         });
 
         wrapper.appendChild(ddlChangeCategory);
@@ -213,7 +213,7 @@ function displayTasks(tasksToDisplay = taskList) {
             if (!isNaN(newDate.getTime())) {
                 newDate.setHours(0, 0, 0, 0);
                 task.deadline = newDate;
-                displayTasks();
+                displayTasks(tasksToDisplay);
             }
         });
 
@@ -248,7 +248,7 @@ function displayTasks(tasksToDisplay = taskList) {
         // Create a ddlChangeStatus event for each task
         ddlChangeStatus.addEventListener("change", (e) => {
             task.status = e.target.value;
-            displayTasks();
+            displayTasks(tasksToDisplay);
         });
 
         const btnDelete = document.createElement("button");
@@ -259,7 +259,7 @@ function displayTasks(tasksToDisplay = taskList) {
         btnDelete.addEventListener("click", () => {
             const index = tasksToDisplay.indexOf(task);
             tasksToDisplay.splice(index, 1);
-            displayTasks();
+            displayTasks(tasksToDisplay);
         });
 
         footer.appendChild(ddlChangeStatus);
@@ -297,7 +297,6 @@ function parseDateInput(value) {
     const [year, month, day] = value.split("-").map(Number);
     return new Date(year, month - 1, day);
 }
-
 
 // Events
 document.addEventListener("DOMContentLoaded", () => {
